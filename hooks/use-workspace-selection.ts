@@ -1,8 +1,24 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { ACCESSORIES, CHAIRS, DESKS, MAX_MONITORS, MONITOR_PRICE } from "@/lib/catalog";
-import type { AccessoryKey, WorkspaceSelection } from "@/lib/types";
+import {
+  ACCESSORIES,
+  BALI_LOCATIONS,
+  CHAIRS,
+  DESKS,
+  MAX_MONITORS,
+  MONITOR_PRICE,
+  RENTAL_DURATIONS,
+  USD_RATE,
+} from "@/lib/catalog";
+import type {
+  AccessoryKey,
+  AmbienceMode,
+  CameraView,
+  Currency,
+  RentalDuration,
+  WorkspaceSelection,
+} from "@/lib/types";
 
 const INITIAL_SELECTION: WorkspaceSelection = {
   deskId: DESKS[0].id,
@@ -21,6 +37,12 @@ const INITIAL_SELECTION: WorkspaceSelection = {
 
 export function useWorkspaceSelection() {
   const [selection, setSelection] = useState<WorkspaceSelection>(INITIAL_SELECTION);
+  const [ambience, setAmbience] = useState<AmbienceMode>("day");
+  const [cameraView, setCameraView] = useState<CameraView>("iso");
+  const [showHotspots, setShowHotspots] = useState<boolean>(true);
+  const [duration, setDuration] = useState<RentalDuration>("1month");
+  const [location, setLocation] = useState<string>(BALI_LOCATIONS[0]);
+  const [currency, setCurrency] = useState<Currency>("IDR");
 
   const desk = useMemo(
     () => DESKS.find((d) => d.id === selection.deskId) ?? DESKS[0],
@@ -36,11 +58,21 @@ export function useWorkspaceSelection() {
     [selection.accessories],
   );
 
-  const total = useMemo(() => {
+  const monthlyTotal = useMemo(() => {
     const monitorsTotal = selection.monitorCount * MONITOR_PRICE;
     const accessoriesTotal = activeAccessories.reduce((sum, a) => sum + a.price, 0);
     return desk.price + chair.price + monitorsTotal + accessoriesTotal;
   }, [desk, chair, selection.monitorCount, activeAccessories]);
+
+  const currentDurationInfo = useMemo(
+    () => RENTAL_DURATIONS.find((d) => d.id === duration) ?? RENTAL_DURATIONS[1],
+    [duration],
+  );
+
+  // Period total calculated according to duration multiplier
+  const periodTotal = useMemo(() => {
+    return Math.round(monthlyTotal * currentDurationInfo.mult);
+  }, [monthlyTotal, currentDurationInfo]);
 
   function selectDesk(id: string) {
     setSelection((prev) => ({ ...prev, deskId: id }));
@@ -64,15 +96,38 @@ export function useWorkspaceSelection() {
     }));
   }
 
+  function formatPrice(idrAmount: number): string {
+    if (currency === "USD") {
+      const usd = Math.round(idrAmount / USD_RATE);
+      return `$${usd}`;
+    }
+    return `Rp${idrAmount.toLocaleString("id-ID")}`;
+  }
+
   return {
     selection,
     desk,
     chair,
     activeAccessories,
-    total,
+    monthlyTotal,
+    periodTotal,
+    duration,
+    currentDurationInfo,
+    location,
+    currency,
+    ambience,
+    cameraView,
+    showHotspots,
+    setAmbience,
+    setCameraView,
+    setShowHotspots,
+    setDuration,
+    setLocation,
+    setCurrency,
     selectDesk,
     selectChair,
     setMonitorCount,
     toggleAccessory,
+    formatPrice,
   };
 }
