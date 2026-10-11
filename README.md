@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Forma — Design Your Workspace
 
-## Getting Started
+A 3D workspace builder for [monis.rent](https://www.monis.rent/), built for the Desent Solutions developer challenge.
 
-First, run the development server:
+**Live URL:** https://desent.arigunawanj.com/
+
+## Approach
+
+The brief asked for something "cool, visual, fun" instead of just another catalog grid, so that's what I went for: a 3D room that updates live as you pick things — desk, chair, monitors, lamp, plant, coffee station, outdoor gear, relax zone, garage space. The catalog panel on the side is grouped by category, and once you're happy with the setup you can open the summary to see everything itemized plus the total before "renting."
+
+Flow: pick a desk and chair (one each, required) → add monitors with a stepper → toggle whatever extras you want → review it all and the total in a slide-over → confirm.
+
+## Why these tools
+
+- **Next.js 16 (App Router) + React 19 + TypeScript** — required by the brief, and a natural fit for this kind of single interactive page.
+- **Three.js via `@react-three/fiber` + `@react-three/drei`** — lets the scene be written as React components (OrbitControls, lighting, ContactShadows) instead of raw imperative Three.js, which made the room/furniture composition much easier to reason about.
+- **GSAP + `@gsap/react`** — hero and summary panel reveal animations, using `useGSAP` so cleanup on unmount is handled for you.
+- **Tailwind CSS + shadcn/ui** — already set up in the repo, so I reused the existing `Tabs`, `Sheet`, `Button` instead of rebuilding them.
+- **Plain React state** (`useState` in a `useWorkspaceSelection` hook) — it's a single page, no real need for Zustand or Redux.
+- **Vercel** for deployment, as required.
+
+## What I'd do with more time
+
+- Proper furniture models/materials — a couple of pieces (coffee machine, scooter) still borrow geometry from other items as a time-saving shortcut.
+- Tune 3D performance on mobile — it works, but isn't optimized (LOD, shadow resolution, etc).
+- Persist the chosen setup (query string or localStorage) so a reload or shared link doesn't reset to default.
+- Pull pricing/availability from a real API instead of a static catalog file.
+- A real checkout flow — "Rent this setup" is currently just a confirmation UI, not an actual reservation.
+
+## Running locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Open [http://localhost:3000](http://localhost:3000).
