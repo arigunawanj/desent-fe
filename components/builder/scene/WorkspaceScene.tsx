@@ -181,18 +181,145 @@ function SurfboardModel({
 }) {
   return (
     <group position={position} rotation={rotation}>
+      {/* Clean matte ivory surfboard body matching thumbnail */}
       <mesh scale={[0.24, 0.95, 0.045]} castShadow receiveShadow>
         <capsuleGeometry args={[1, 0.8, 16, 32]} />
-        <meshStandardMaterial color="#f5eee3" roughness={0.25} metalness={0.05} />
+        <meshStandardMaterial color="#f4ede1" roughness={0.28} metalness={0.04} />
       </mesh>
+      {/* Natural wood stringer down the center */}
       <mesh position={[0, 0, 0.046]} scale={[0.012, 1.7, 0.002]}>
         <planeGeometry args={[1, 1]} />
-        <meshStandardMaterial color="#8b5a36" roughness={0.6} />
+        <meshStandardMaterial color="#8b5a36" roughness={0.65} />
       </mesh>
-      <mesh position={[0, -0.2, 0.046]} scale={[0.38, 0.12, 0.002]}>
-        <planeGeometry args={[1, 1]} />
-        <meshStandardMaterial color="#ba6244" roughness={0.5} />
-      </mesh>
+    </group>
+  );
+}
+
+function EspressoStation({
+  position = [1.68, 0, -0.65],
+}: {
+  position?: [number, number, number];
+}) {
+  return (
+    <group position={position}>
+      {/* Credenza side table cabinet (warm natural oak) */}
+      <RoundedBox
+        args={[0.54, 0.72, 0.46]}
+        radius={0.02}
+        position={[0, 0.36, 0]}
+        castShadow
+        receiveShadow
+      >
+        <meshStandardMaterial color="#8d725a" roughness={0.7} />
+      </RoundedBox>
+      <RoundedBox
+        args={[0.57, 0.025, 0.49]}
+        radius={0.01}
+        position={[0, 0.725, 0]}
+        castShadow
+      >
+        <meshStandardMaterial color="#7a5f48" roughness={0.65} />
+      </RoundedBox>
+
+      {/* Italian Stainless Steel Espresso Machine matching product image */}
+      <group position={[0, 0.74, 0]}>
+        {/* Polished chrome main body */}
+        <RoundedBox
+          args={[0.24, 0.28, 0.26]}
+          radius={0.015}
+          position={[0, 0.145, 0]}
+          castShadow
+        >
+          <meshStandardMaterial
+            color="#dcdfe3"
+            metalness={0.92}
+            roughness={0.16}
+          />
+        </RoundedBox>
+        {/* Top cup warmer chrome railings */}
+        <mesh position={[0, 0.29, 0.11]} castShadow>
+          <boxGeometry args={[0.22, 0.01, 0.006]} />
+          <meshStandardMaterial color="#c5c8cc" metalness={0.95} roughness={0.15} />
+        </mesh>
+        <mesh position={[0, 0.29, -0.11]} castShadow>
+          <boxGeometry args={[0.22, 0.01, 0.006]} />
+          <meshStandardMaterial color="#c5c8cc" metalness={0.95} roughness={0.15} />
+        </mesh>
+        {/* Porcelain espresso cups on top */}
+        <mesh position={[-0.05, 0.305, 0.01]} castShadow>
+          <cylinderGeometry args={[0.024, 0.018, 0.032, 16]} />
+          <meshStandardMaterial color="#faf8f5" roughness={0.2} />
+        </mesh>
+        <mesh position={[0.05, 0.305, 0.02]} castShadow>
+          <cylinderGeometry args={[0.024, 0.018, 0.032, 16]} />
+          <meshStandardMaterial color="#faf8f5" roughness={0.2} />
+        </mesh>
+
+        {/* Circular front pressure dial */}
+        <mesh position={[0.055, 0.21, 0.133]}>
+          <circleGeometry args={[0.02, 24]} />
+          <meshStandardMaterial color="#f8f8f8" roughness={0.3} />
+        </mesh>
+        <mesh position={[0.055, 0.21, 0.134]}>
+          <ringGeometry args={[0.018, 0.022, 24]} />
+          <meshStandardMaterial color="#888c90" metalness={0.9} />
+        </mesh>
+
+        {/* Chrome Group Head */}
+        <mesh
+          position={[-0.035, 0.16, 0.15]}
+          rotation={[Math.PI / 2, 0, 0]}
+          castShadow
+        >
+          <cylinderGeometry args={[0.03, 0.032, 0.04, 20]} />
+          <meshStandardMaterial color="#e4e7ea" metalness={0.95} roughness={0.1} />
+        </mesh>
+        {/* Portafilter with black ergonomic handle angled to right */}
+        <group position={[-0.035, 0.14, 0.17]} rotation={[0.05, 0.42, 0]}>
+          <mesh position={[0, 0, 0.065]} rotation={[Math.PI / 2, 0, 0]} castShadow>
+            <cylinderGeometry args={[0.008, 0.007, 0.1, 16]} />
+            <meshStandardMaterial color="#1e1e1c" roughness={0.65} />
+          </mesh>
+          <mesh position={[0, 0, 0.12]}>
+            <sphereGeometry args={[0.01, 16, 16]} />
+            <meshStandardMaterial
+              color="#c5c8cc"
+              metalness={0.95}
+              roughness={0.15}
+            />
+          </mesh>
+        </group>
+
+        {/* Steam Wand on Left */}
+        <group position={[-0.1, 0.17, 0.11]} rotation={[0.2, 0, -0.25]}>
+          <mesh position={[0, -0.055, 0.02]} rotation={[0.1, 0, 0]} castShadow>
+            <cylinderGeometry args={[0.004, 0.004, 0.12, 12]} />
+            <meshStandardMaterial color="#d4d7db" metalness={0.95} roughness={0.1} />
+          </mesh>
+          <mesh position={[0, 0.01, 0]}>
+            <cylinderGeometry args={[0.009, 0.009, 0.018, 12]} />
+            <meshStandardMaterial color="#222220" roughness={0.7} />
+          </mesh>
+        </group>
+
+        {/* Drip Tray at Bottom with Chrome Grille */}
+        <RoundedBox
+          args={[0.24, 0.03, 0.13]}
+          radius={0.007}
+          position={[0, 0.018, 0.14]}
+          castShadow
+        >
+          <meshStandardMaterial color="#d0d3d6" metalness={0.9} roughness={0.2} />
+        </RoundedBox>
+        <mesh position={[0, 0.034, 0.14]} rotation={[-Math.PI / 2, 0, 0]}>
+          <planeGeometry args={[0.22, 0.11]} />
+          <meshStandardMaterial
+            color="#2d3032"
+            metalness={0.8}
+            roughness={0.4}
+          />
+        </mesh>
+      </group>
     </group>
   );
 }
@@ -330,17 +457,7 @@ export function WorkspaceScene({
             />
           )}
           {selection.accessories.coffeeMachine && (
-            <group position={[1.65, 0, -0.65]}>
-              <RoundedBox
-                args={[0.55, 0.72, 0.48]}
-                radius={0.02}
-                position={[0, 0.36, 0]}
-                castShadow
-              >
-                <meshStandardMaterial color="#8c7560" />
-              </RoundedBox>
-              <Furniture file="coffee" height={0.35} position={[0, 0.72, 0]} />
-            </group>
+            <EspressoStation position={[1.68, 0, -0.65]} />
           )}
           {selection.accessories.motorcycle && (
             <Furniture

@@ -101,8 +101,8 @@ export const ACCESSORIES: AccessoryOption[] = [
     price: 350_000,
     color: "#8e44ad",
     group: "relaxZone",
-    description: "Relax Zone · Sunbed bean bag",
-    image: "/products/beanbag.jpg",
+    description: "Relax Zone · Oak lounge armchair",
+    image: "/products/lounge-chair.png",
   },
   {
     id: "toolShelf",
