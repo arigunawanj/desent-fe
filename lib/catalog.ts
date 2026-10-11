@@ -51,15 +51,6 @@ export const MAX_MONITORS = 3;
 
 export const ACCESSORIES: AccessoryOption[] = [
   {
-    id: "lamp",
-    name: "Desk Lamp",
-    price: 150_000,
-    color: "#f2b705",
-    group: "accessories",
-    description: "Warm LED · Focused light",
-    image: "/products/lamp.png",
-  },
-  {
     id: "plant",
     name: "Plant",
     price: 80_000,
@@ -67,6 +58,15 @@ export const ACCESSORIES: AccessoryOption[] = [
     group: "accessories",
     description: "Potted greenery · Terracotta pot",
     image: "/products/plant.png",
+  },
+  {
+    id: "lamp",
+    name: "Desk Lamp",
+    price: 150_000,
+    color: "#f2b705",
+    group: "accessories",
+    description: "Warm LED · Focused light",
+    image: "/products/lamp.png",
   },
   {
     id: "coffeeMachine",
@@ -107,7 +107,7 @@ export const ACCESSORIES: AccessoryOption[] = [
   {
     id: "toolShelf",
     name: "Oak Bookcase",
-    price: 600_000,
+    price: 800_000,
     color: "#6b4f3a",
     group: "garageSpace",
     description: "Garage Space · 4-tier modular shelf",

@@ -7,9 +7,9 @@ import type { AccessoryKey, WorkspaceSelection } from "@/lib/types";
 const INITIAL_SELECTION: WorkspaceSelection = {
   deskId: DESKS[0].id,
   chairId: CHAIRS[0].id,
-  monitorCount: 1,
+  monitorCount: 2,
   accessories: {
-    lamp: false,
+    lamp: true,
     plant: false,
     coffeeMachine: false,
     surfboard: false,

@@ -30,7 +30,7 @@ function Room() {
       {/* Floor */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.012, 0]} receiveShadow>
         <planeGeometry args={[12, 12]} />
-        <meshStandardMaterial map={floor} color="#c5b9a7" roughness={0.78} />
+        <meshStandardMaterial map={floor} color="#e6ddd2" roughness={0.72} />
       </mesh>
 
       {/* Back Wall */}
@@ -78,7 +78,7 @@ function Room() {
         position={[0, 0.002, 0.35]}
         receiveShadow
       >
-        <meshStandardMaterial color="#aaa092" roughness={1} />
+        <meshStandardMaterial color="#e4ded2" roughness={0.96} />
       </RoundedBox>
 
       {/* Wall Art */}
@@ -123,39 +123,96 @@ function Room() {
   );
 }
 
+function TaskLamp({
+  position = [-0.68, 0.75, -0.32],
+}: {
+  position?: [number, number, number];
+}) {
+  return (
+    <group position={position}>
+      {/* Weighted round base */}
+      <mesh position={[0, 0.008, 0]} castShadow>
+        <cylinderGeometry args={[0.075, 0.08, 0.016, 24]} />
+        <meshStandardMaterial color="#262624" roughness={0.45} metalness={0.4} />
+      </mesh>
+      {/* Lower arm */}
+      <mesh position={[0, 0.14, 0.03]} rotation={[0.3, 0, 0]} castShadow>
+        <cylinderGeometry args={[0.007, 0.007, 0.28, 16]} />
+        <meshStandardMaterial color="#1f1f1d" roughness={0.4} metalness={0.5} />
+      </mesh>
+      {/* Elbow hinge joint */}
+      <mesh position={[0, 0.27, 0.07]} castShadow>
+        <sphereGeometry args={[0.014, 16, 16]} />
+        <meshStandardMaterial color="#1a1a18" roughness={0.3} metalness={0.7} />
+      </mesh>
+      {/* Upper arm angled forward */}
+      <mesh position={[0.06, 0.36, 0.02]} rotation={[-0.45, 0, -0.3]} castShadow>
+        <cylinderGeometry args={[0.007, 0.007, 0.22, 16]} />
+        <meshStandardMaterial color="#1f1f1d" roughness={0.4} metalness={0.5} />
+      </mesh>
+      {/* Lamp cone shade pointing down/center */}
+      <group position={[0.13, 0.44, -0.04]} rotation={[0.45, -0.2, 0.7]}>
+        <mesh castShadow>
+          <coneGeometry args={[0.078, 0.13, 24, 1, true]} />
+          <meshStandardMaterial
+            color="#262624"
+            roughness={0.45}
+            metalness={0.3}
+            side={2}
+          />
+        </mesh>
+        {/* Soft warm light source */}
+        <pointLight intensity={1.8} distance={2.2} color="#fff2dc" />
+        <mesh position={[0, -0.03, 0]}>
+          <sphereGeometry args={[0.022, 16, 16]} />
+          <meshBasicMaterial color="#fff4df" />
+        </mesh>
+      </group>
+    </group>
+  );
+}
+
+function SurfboardModel({
+  position = [-2.3, 0.95, -1.75],
+  rotation = [0, 0.45, -0.16],
+}: {
+  position?: [number, number, number];
+  rotation?: [number, number, number];
+}) {
+  return (
+    <group position={position} rotation={rotation}>
+      <mesh scale={[0.24, 0.95, 0.045]} castShadow receiveShadow>
+        <capsuleGeometry args={[1, 0.8, 16, 32]} />
+        <meshStandardMaterial color="#f5eee3" roughness={0.25} metalness={0.05} />
+      </mesh>
+      <mesh position={[0, 0, 0.046]} scale={[0.012, 1.7, 0.002]}>
+        <planeGeometry args={[1, 1]} />
+        <meshStandardMaterial color="#8b5a36" roughness={0.6} />
+      </mesh>
+      <mesh position={[0, -0.2, 0.046]} scale={[0.38, 0.12, 0.002]}>
+        <planeGeometry args={[1, 1]} />
+        <meshStandardMaterial color="#ba6244" roughness={0.5} />
+      </mesh>
+    </group>
+  );
+}
+
 function DesktopDetails() {
   return (
-    <group position={[0, 0.756, 0.02]}>
+    <group position={[0, 0.753, -0.16]}>
+      {/* Taupe leather desk mat */}
       <RoundedBox
-        args={[0.75, 0.006, 0.35]}
-        radius={0.02}
-        position={[0.04, 0, 0.06]}
+        args={[0.72, 0.006, 0.34]}
+        radius={0.015}
+        position={[0, 0.003, 0]}
         receiveShadow
       >
-        <meshStandardMaterial color="#685b4e" roughness={0.98} />
+        <meshStandardMaterial color="#7c7468" roughness={0.94} />
       </RoundedBox>
-      <RoundedBox
-        args={[0.39, 0.015, 0.135]}
-        radius={0.007}
-        position={[-0.06, 0.012, 0.05]}
-        castShadow
-      >
-        <meshStandardMaterial color="#d7d5cd" roughness={0.6} />
-      </RoundedBox>
-      {Array.from({ length: 4 }, (_, row) =>
-        Array.from({ length: 12 }, (_, col) => (
-          <mesh
-            key={`${row}-${col}`}
-            position={[-0.23 + col * 0.03, 0.022, 0.002 + row * 0.029]}
-          >
-            <boxGeometry args={[0.025, 0.006, 0.022]} />
-            <meshStandardMaterial color="#edede8" />
-          </mesh>
-        )),
-      )}
-      <mesh position={[0.26, 0.024, 0.06]} scale={[0.033, 0.016, 0.055]} castShadow>
+      {/* Clean minimalist wireless mouse */}
+      <mesh position={[0.26, 0.011, 0.02]} scale={[0.032, 0.015, 0.052]} castShadow>
         <sphereGeometry args={[1, 24, 16]} />
-        <meshStandardMaterial color="#e4e3dc" roughness={0.5} />
+        <meshStandardMaterial color="#eae7df" roughness={0.4} />
       </mesh>
     </group>
   );
@@ -201,7 +258,7 @@ export function WorkspaceScene({
         frameloop="demand"
         shadows
         camera={{
-          position: front ? [0, 2.15, 5.9] : [3.65, 2.5, 4.5],
+          position: front ? [0, 2.1, 5.5] : [1.85, 2.65, 4.65],
           fov: 39,
         }}
         dpr={[1, 1.5]}
@@ -241,8 +298,8 @@ export function WorkspaceScene({
           <Furniture
             file={chair.variant === "ergo" ? "office-chair" : "lounge-chair"}
             height={chair.variant === "ergo" ? 1.16 : 1.02}
-            position={[0.15, 0, 0.74]}
-            rotation={[0, Math.PI - 0.3, 0]}
+            position={[0, 0, 0.52]}
+            rotation={[0, Math.PI - 0.14, 0]}
           />
           <DesktopDetails />
           {Array.from({ length: selection.monitorCount }, (_, i) => (
@@ -256,18 +313,13 @@ export function WorkspaceScene({
             />
           ))}
           {selection.accessories.lamp && (
-            <Furniture
-              file="lamp"
-              height={0.42}
-              position={[-0.72, 0.75, -0.35]}
-              rotation={[0, 0.65, 0]}
-            />
+            <TaskLamp position={[-0.68, 0.75, -0.32]} />
           )}
           {selection.accessories.plant && (
             <Furniture
               file="plant"
-              height={1.22}
-              position={[-1.43, 0, -0.7]}
+              height={1.15}
+              position={[-1.45, 0, -0.65]}
             />
           )}
           {selection.accessories.toolShelf && (
@@ -307,16 +359,7 @@ export function WorkspaceScene({
             />
           )}
           {selection.accessories.surfboard && (
-            <group position={[-2.2, 1.05, -1.75]} rotation={[0, 0.3, -0.14]}>
-              <mesh scale={[0.3, 1, 0.045]} castShadow>
-                <sphereGeometry args={[1, 48, 48]} />
-                <meshStandardMaterial color="#ddd1b9" roughness={0.28} />
-              </mesh>
-              <mesh position={[0, 0, 0.047]} scale={[0.012, 0.98, 0.003]}>
-                <sphereGeometry args={[1, 16, 16]} />
-                <meshStandardMaterial color="#825c45" />
-              </mesh>
-            </group>
+            <SurfboardModel position={[-2.3, 0.95, -1.75]} rotation={[0, 0.45, -0.16]} />
           )}
           <ContactShadows
             key={`${desk.id}-${chair.id}-${Object.values(selection.accessories).join("")}-${selection.monitorCount}`}
@@ -332,13 +375,13 @@ export function WorkspaceScene({
         <OrbitControls
           makeDefault
           enablePan={false}
-          minDistance={3.4}
-          maxDistance={8}
-          minPolarAngle={0.5}
+          minDistance={3.2}
+          maxDistance={7.5}
+          minPolarAngle={0.4}
           maxPolarAngle={Math.PI / 2.15}
           minAzimuthAngle={-0.65}
           maxAzimuthAngle={1.05}
-          target={[0, 0.88, -0.2]}
+          target={[0, 0.82, -0.2]}
         />
       </Canvas>
     </SceneBoundary>

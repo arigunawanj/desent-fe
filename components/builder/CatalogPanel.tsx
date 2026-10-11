@@ -97,7 +97,7 @@ export function CatalogPanel({
           </div>
           <MonitorStepper count={selection.monitorCount} onChange={setMonitorCount} />
           <div className="extras-list">
-            {ACCESSORIES.map((a) => (
+            {ACCESSORIES.filter((a) => a.id !== "lamp").map((a) => (
               <ItemCard
                 key={a.id}
                 name={a.name}
