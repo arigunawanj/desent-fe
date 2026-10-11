@@ -18,9 +18,9 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "monis.rent — 3D Workspace Studio Bali | Rent Office Equipment",
+  title: "Forma — Your Workspace, Your Way",
   description:
-    "Interactive 3D workspace studio for monis.rent. Design your dream desk, ergonomic chair, multi-screen monitors & Bali island gear with next-day villa delivery.",
+    "Design your Bali workspace with real-time 3D furniture, flexible choices, and a clear monthly rental estimate.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
