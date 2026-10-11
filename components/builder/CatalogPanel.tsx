@@ -51,6 +51,7 @@ export function CatalogPanel({
             {DESKS.map((d) => (
               <ItemCard
                 key={d.id}
+                id={d.id}
                 name={d.name}
                 price={d.price}
                 image={d.image}
@@ -63,7 +64,7 @@ export function CatalogPanel({
           <div className="selection-tip">
             <Check size={15} />
             <p>
-              One desk, one starting point.
+               One desk, one starting point.
               <br />
               <span>Switch pieces any time. Your room updates instantly.</span>
             </p>
@@ -79,6 +80,7 @@ export function CatalogPanel({
             {CHAIRS.map((c) => (
               <ItemCard
                 key={c.id}
+                id={c.id}
                 name={c.name}
                 price={c.price}
                 image={c.image}
@@ -100,6 +102,7 @@ export function CatalogPanel({
             {ACCESSORIES.filter((a) => a.id !== "lamp").map((a) => (
               <ItemCard
                 key={a.id}
+                id={a.id}
                 name={a.name}
                 price={a.price}
                 image={a.image}

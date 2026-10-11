@@ -31,6 +31,8 @@ const WorkspaceScene = dynamic(
   },
 );
 
+import { ThumbnailGenerator } from "./ThumbnailGenerator";
+
 export function Builder() {
   const workspace = useWorkspaceSelection();
   const { selection, desk, chair, activeAccessories, total, toggleAccessory } = workspace;
@@ -42,6 +44,7 @@ export function Builder() {
 
   return (
     <>
+      <ThumbnailGenerator />
       <Hero />
 
       <section id="builder" className="studio" aria-label="Workspace designer">

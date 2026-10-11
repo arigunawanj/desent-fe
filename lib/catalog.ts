@@ -75,7 +75,7 @@ export const ACCESSORIES: AccessoryOption[] = [
     color: "#5c3a21",
     group: "coffeeStation",
     description: "Coffee Station · Italian espresso maker",
-    image: "/products/coffee.jpg",
+    image: "/products/coffee.png",
   },
   {
     id: "surfboard",
@@ -84,7 +84,7 @@ export const ACCESSORIES: AccessoryOption[] = [
     color: "#f26a4b",
     group: "outdoorGear",
     description: "Outdoor Gear · 6'4 funboard",
-    image: "/products/surfboard.jpg",
+    image: "/products/surfboard.png",
   },
   {
     id: "motorcycle",
@@ -93,7 +93,7 @@ export const ACCESSORIES: AccessoryOption[] = [
     color: "#1f1f1f",
     group: "outdoorGear",
     description: "Outdoor Gear · 155cc automatic",
-    image: "/products/scooter.jpg",
+    image: "/products/scooter.png",
   },
   {
     id: "beanBag",
@@ -111,7 +111,7 @@ export const ACCESSORIES: AccessoryOption[] = [
     color: "#6b4f3a",
     group: "garageSpace",
     description: "Garage Space · 4-tier modular shelf",
-    image: "/products/shelf.jpg",
+    image: "/products/shelf.png",
   },
 ];
 
